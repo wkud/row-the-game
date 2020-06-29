@@ -28,6 +28,8 @@ public class RiverSegment : MonoBehaviour
     void Awake() => river = FindObjectOfType<River>();
     void Update()
     {
+        transform.position += Vector3.back * river.FlowSpeed; 
+
         if (end.position.z < river.bottomScreenBorderZ)
             onExitScreen();
     }

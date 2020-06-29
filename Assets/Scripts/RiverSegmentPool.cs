@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-class RiverPool
+class RiverSegmentPool
 {
 	private List<RiverSegment> pool = new List<RiverSegment>();
 

@@ -8,12 +8,13 @@ using UnityEngine;
 
 public class River : MonoBehaviour
 {
-    public float bottomScreenBorderZ;
+    public float bottomScreenBorderZ { get; private set; }
+    public float FlowSpeed;
 
     [SerializeField] private RiverSegment[] riverSegments;
     [SerializeField] private RiverSegment startSegment;
     private Transform segmentParent;
-    private RiverPool pool = new RiverPool();
+    private RiverSegmentPool pool = new RiverSegmentPool();
 
     private Vector3 spawnPosition;
     private float leftBorderX;
@@ -56,7 +57,10 @@ public class River : MonoBehaviour
         PlaceSegment(startSegment);
         GenerateRiver();
     }
-
+    void Update()
+    {
+        
+    }
     private void GenerateRiver()
     {
         while(canGenerate)
@@ -84,6 +88,7 @@ public class River : MonoBehaviour
         segment.onExitScreen += delegate 
         {
             pool.Push(segment);
+            GenerateRiver();
         };
 
         spawnPosition += segment.shift; //set spawnPosition at the end of last instantiated segment
