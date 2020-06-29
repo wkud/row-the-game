@@ -308,11 +308,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: River
       objectReference: {fileID: 0}
-    - target: {fileID: 2502169950595371303, guid: 316fa7a1a0b0db54687b37f3d19717e6,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 7436835790301658366, guid: 316fa7a1a0b0db54687b37f3d19717e6,
         type: 3}
       propertyPath: m_LocalPosition.x

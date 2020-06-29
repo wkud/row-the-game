@@ -3852,6 +3852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d2bc35aad92f24ba6b215663a79a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 2
   start: {fileID: 5942165286786245892}
   end: {fileID: 323919533714275223}
 --- !u!1 &3923500834414942156

@@ -8,10 +8,13 @@ using UnityEngine;
 
 public class River : MonoBehaviour
 {
-    [SerializeField] private GameObject[] riverSegments;
-    [SerializeField] private GameObject startSegment;
+    public float bottomScreenBorderZ;
+
+    [SerializeField] private RiverSegment[] riverSegments;
+    [SerializeField] private RiverSegment startSegment;
     private Transform segmentParent;
-    
+    private RiverPool pool = new RiverPool();
+
     private Vector3 spawnPosition;
     private float leftBorderX;
     private float rightBorderX;
@@ -23,16 +26,20 @@ public class River : MonoBehaviour
         //validate river segments
         foreach (var segment in riverSegments)
         {
-            if (segment.GetComponent<RiverSegment>().shift.z < 0)
+            if (segment.shift.z < 0)
                 throw new BadRiverSegmentException(segment.name);
         }
 
         //get references to children
         segmentParent = transform.Find("segments");
         var config = transform.Find("config points").transform;
-
+        
         //find objects indicating positional parameters
-        var start = config.Find("start"); //indicates position of first segment
+        GetParameters(config);
+    }
+    private void GetParameters(Transform config)
+    {
+        var start = config.Find("start"); //indicates position of first segment and Z coordinate of bottom screen border
         var end = config.Find("end"); //indicates Z coordinate where generation should stop
         var leftBorder = config.Find("left screen border"); //indicates X coordinate of left screen border
         var rightBorder = config.Find("right screen border"); //indicates X coordinate of right screen border
@@ -40,8 +47,10 @@ public class River : MonoBehaviour
         endPositionZ = end.position.z;
         leftBorderX = leftBorder.position.x;
         rightBorderX = rightBorder.position.x;
+        bottomScreenBorderZ = start.position.z;
         spawnPosition = start.position;
     }
+
     void Start()
     {
         PlaceSegment(startSegment);
@@ -60,12 +69,23 @@ public class River : MonoBehaviour
             PlaceSegment(randomSegment);
         }
     }
-    private void PlaceSegment(GameObject segmentPrefab)
+    private void PlaceSegment(RiverSegment segmentPrefab)
     {
-        var segmentInstance = Instantiate(segmentPrefab, segmentParent);
-        var segmentComponent = segmentInstance.GetComponent<RiverSegment>();
+        //get segment from pool or instatiate it
+        var segment = pool.TryPop(segmentPrefab.type); //try get already instantiated segment from pool
+        if (segment == null) 
+        {
+            var segmentGameObject = Instantiate(segmentPrefab.gameObject, segmentParent);
+            segment = segmentGameObject.GetComponent<RiverSegment>();
+        }
 
-        segmentComponent.PlaceStartOfSegmentAt(spawnPosition);
-        spawnPosition += segmentComponent.shift; //set spawnPosition at the end of last instantiated segment
+        //set segment up
+        segment.PlaceStartOfSegmentAt(spawnPosition);
+        segment.onExitScreen += delegate 
+        {
+            pool.Push(segment);
+        };
+
+        spawnPosition += segment.shift; //set spawnPosition at the end of last instantiated segment
     }
 }
