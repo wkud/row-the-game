@@ -9,14 +9,16 @@ using UnityEngine;
 public class River : MonoBehaviour
 {
     public float bottomScreenBorderZ { get; private set; }
-    public float FlowSpeed;
+    [SerializeField] public float FlowSpeed;
 
     [SerializeField] private RiverSegment[] riverSegments;
     [SerializeField] private RiverSegment startSegment;
-    private Transform segmentParent;
     private RiverSegmentPool pool = new RiverSegmentPool();
+    private Transform segmentParent;
+    private RiverSegment lastSegment;
 
-    private Vector3 spawnPosition;
+    private Vector3 spawnPosition => lastSegment != null ? lastSegment.endPosition : firstSpawnPosition;
+    private Vector3 firstSpawnPosition;
     private float leftBorderX;
     private float rightBorderX;
     private float endPositionZ;
@@ -49,7 +51,7 @@ public class River : MonoBehaviour
         leftBorderX = leftBorder.position.x;
         rightBorderX = rightBorder.position.x;
         bottomScreenBorderZ = start.position.z;
-        spawnPosition = start.position;
+        firstSpawnPosition = start.position;
     }
 
     void Start()
@@ -57,10 +59,7 @@ public class River : MonoBehaviour
         PlaceSegment(startSegment);
         GenerateRiver();
     }
-    void Update()
-    {
-        
-    }
+
     private void GenerateRiver()
     {
         while(canGenerate)
@@ -81,16 +80,16 @@ public class River : MonoBehaviour
         {
             var segmentGameObject = Instantiate(segmentPrefab.gameObject, segmentParent);
             segment = segmentGameObject.GetComponent<RiverSegment>();
+            segment.onExitScreen += delegate 
+            {
+                pool.Push(segment);
+                GenerateRiver();
+            };
         }
 
         //set segment up
-        segment.PlaceStartOfSegmentAt(spawnPosition);
-        segment.onExitScreen += delegate 
-        {
-            pool.Push(segment);
-            GenerateRiver();
-        };
+        segment.PlaceStartOfSegmentAt(spawnPosition + Vector3.back * FlowSpeed); //predict position in next frame (to fix gaps between segments)
 
-        spawnPosition += segment.shift; //set spawnPosition at the end of last instantiated segment
+        lastSegment = segment;
     }
 }

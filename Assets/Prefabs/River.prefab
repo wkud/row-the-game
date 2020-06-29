@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c59a0b5d14227234fb0a8714ebca74b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bottomScreenBorderZ: 0
+  FlowSpeed: 0.05
   riverSegments:
   - {fileID: 784370126115734959, guid: 58acbde25cc0fe947a772b3e78bcb4e9, type: 3}
   - {fileID: 2067288265812893687, guid: 248cd05a2628b8f40a27b8b3241f8af8, type: 3}
@@ -107,7 +107,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2216153554812738792}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalPosition: {x: 0, y: 0, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8999869069349548787}

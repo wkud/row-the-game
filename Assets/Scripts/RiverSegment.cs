@@ -21,12 +21,13 @@ public class RiverSegment : MonoBehaviour
     public UnityAction onExitScreen;
 
     public Vector3 shift => end.position - start.position; //difference between start and end of segment
+    public Vector3 endPosition => new Vector3(end.position.x, 0, end.position.z); //ignore Y coordinate
     [SerializeField] private Transform start;
     [SerializeField] private Transform end;
 
     private River river;
     void Awake() => river = FindObjectOfType<River>();
-    void Update()
+    void FixedUpdate()
     {
         transform.position += Vector3.back * river.FlowSpeed; 
 
@@ -41,7 +42,11 @@ public class RiverSegment : MonoBehaviour
     }
     public void PlaceStartOfSegmentAt(Vector3 spawnPosition)
     {
+        var prefabVerticalOffset = transform.position.y; //save y offset
+
         var offsetFromPivotToStartOfSegment = start.position - transform.position; //difference between current position and (desired) start position
         transform.position = spawnPosition - offsetFromPivotToStartOfSegment;
+
+        transform.position += Vector3.up * prefabVerticalOffset; //restore y offset
     }
 }
