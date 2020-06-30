@@ -12,7 +12,8 @@ public enum RiverSegmentType
     LargeCurve,
     Meander,
     SlightCurve,
-    SlightUnevenCurve
+    SlightUnevenCurve,
+    SlightMeander
 }
 
 public class RiverSegment : MonoBehaviour
