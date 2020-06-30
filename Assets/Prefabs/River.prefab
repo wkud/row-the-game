@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1211730219736729568}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8, y: 0, z: 0}
+  m_LocalPosition: {x: 10, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8999869069349548787}
@@ -77,11 +77,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FlowSpeed: 0.05
   riverSegments:
-  - {fileID: 784370126115734959, guid: 58acbde25cc0fe947a772b3e78bcb4e9, type: 3}
-  - {fileID: -56147600482130767, guid: 52b844ba79be19a4688a5a3613e2526d, type: 3}
-  - {fileID: 1420166008625690762, guid: 104daefcb9a0cbc48bcd6f1df983e1d5, type: 3}
-  - {fileID: 7564065944846756574, guid: 85c24e9f664bb6f4e90a0bf35a4153e8, type: 3}
-  startSegment: {fileID: 1557951859037406477, guid: c6afc1c8316a1624b926b1aea550f95d,
+  - {fileID: 2289773155658148735, guid: 8ab004c9cbc8877428349a19573b0778, type: 3}
+  - {fileID: 2529095134124179082, guid: 672a2cd18dd528d47be575b54c1d36eb, type: 3}
+  - {fileID: 170485813682836958, guid: 83a630dffd966694d9cfade770d86eb6, type: 3}
+  - {fileID: 4472000791005757116, guid: f541e850fd5673f408517c32cc76f657, type: 3}
+  startSegment: {fileID: 825995632860244661, guid: 9d71cd6905400a84c999d2df2b496782,
     type: 3}
 --- !u!1 &2216153554812738792
 GameObject:
@@ -201,7 +201,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3768420482914578357}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8, y: 0, z: 0}
+  m_LocalPosition: {x: -10, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8999869069349548787}
