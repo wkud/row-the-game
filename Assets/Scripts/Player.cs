@@ -12,7 +12,9 @@ public class Player : MonoBehaviour
     public float moveSuppressionFactor = 0.95f; // in (0, 1), higher value results in smoother suppression
     public float rotationSpeed = 1.0f; // in (0, inf)
     public float rotationSuppressionFactor = 0.95f;  // in (0, 1), higher value results in smoother suppression
+    
 
+    Animator m_Animator;
     Rigidbody m_Rigidbody;
     Vector3 m_Movement = Vector3.zero;
     Quaternion m_Rotation = Quaternion.identity;
@@ -23,6 +25,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
+        m_Animator = gameObject.GetComponent<Animator>();
     }
 
     void FixedUpdate()
@@ -43,6 +46,13 @@ public class Player : MonoBehaviour
             m_RotationSuppression = 1.0f;
 
             m_RowPerformed = true;
+            if (horizontal > 0)
+            {
+                m_Animator.SetTrigger("swingRight");
+            } else
+            {
+                m_Animator.SetTrigger("swingLeft");
+            }
         }
 
         m_Rigidbody.MovePosition(m_Rigidbody.position + m_Movement);
