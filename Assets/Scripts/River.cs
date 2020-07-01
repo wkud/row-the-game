@@ -92,4 +92,9 @@ public class River : MonoBehaviour
 
         lastSegment = segment;
     }
+
+    public Vector3 GetVelocity()
+    {
+        return (Vector3.back * FlowSpeed) / Time.fixedDeltaTime;
+    }
 }
