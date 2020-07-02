@@ -22,6 +22,13 @@ public class Player : MonoBehaviour
     bool m_RowPerformed = false;
     float m_RotationSuppression = 1.0f; // higher suppression when m_RotationSuppression is smaller
 
+    void OnCollisionEnter(Collision otcher)
+    {
+        m_Animator.SetBool("crashed", true);
+        m_Animator.SetTrigger("crash");
+        Debug.Log("wypierdolil sie");
+    }
+    
     void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
