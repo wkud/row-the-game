@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using BayatGames.SaveGameFree;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
     public TextMeshProUGUI gameScoreText;
+    public TextMeshProUGUI endGameScoreText;
+    public TextMeshProUGUI endGameHighScoreText;
     public Camera camera;
     public Player player;
     public int scoreRefreshToSkip = 30;
@@ -18,6 +22,19 @@ public class ScoreManager : MonoBehaviour
     int m_GameScore = 0;
     int m_GameHighScore = 0;
     int m_SkippedScoreRefreshes = 0;
+
+    void Start()
+    {
+        if (SaveGame.Exists("highScore"))
+        {
+            m_GameHighScore = SaveGame.Load<int>("highScore");
+        }
+    }
+
+    void OnDestroy()
+    {
+        SaveGame.Save<int>("highScore", m_GameHighScore);
+    }
 
     void FixedUpdate()
     {
@@ -62,6 +79,13 @@ public class ScoreManager : MonoBehaviour
             gameScoreText.text = m_GameScore.ToString();
             m_SkippedScoreRefreshes = 0;
         }
+        SetEndGameScores();
         ++m_SkippedScoreRefreshes;
+    }
+
+    void SetEndGameScores()
+    {
+        endGameScoreText.text = m_GameScore.ToString();
+        endGameHighScoreText.text = m_GameHighScore.ToString();
     }
 }

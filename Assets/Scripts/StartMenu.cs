@@ -5,9 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class StartMenu : MonoBehaviour
 {
+    public UIManager uiManager;
+
     public void StartGame()
     {
-        gameObject.SetActive(false);
+        uiManager.SetShouldGameStart(true);
     }
 
     public void QuitGame()

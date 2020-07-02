@@ -24,11 +24,20 @@ public class Player : MonoBehaviour
     Vector3 m_CurrentPosition;
     Vector3 m_LastPosition;
 
-    void OnCollisionEnter(Collision otcher)
+    bool hasCrashed = false;
+    bool skipUpdate = true;
+
+    void OnCollisionEnter(Collision other)
     {
         m_Animator.SetBool("crashed", true);
         m_Animator.SetTrigger("crash");
+        hasCrashed = true;
         Debug.Log("wypierdolil sie");
+    }
+
+    public bool CrashOccured()
+    {
+        return hasCrashed;
     }
 
     void Start()
@@ -40,8 +49,18 @@ public class Player : MonoBehaviour
         m_CurrentPosition = transform.position;
     }
 
+    public void SetSkipUpdate(bool newValue)
+    {
+        skipUpdate = newValue;
+    }
+
     void FixedUpdate()
     {
+        if (skipUpdate)
+        {
+            return;
+        }
+
         float horizontal = Input.GetAxis("Horizontal");
 
         bool hasHorizontalInput = !Mathf.Approximately(horizontal, 0f);
