@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
     public float moveSuppressionFactor = 0.95f; // in (0, 1), higher value results in smoother suppression
     public float rotationSpeed = 1.0f; // in (0, inf)
     public float rotationSuppressionFactor = 0.95f;  // in (0, 1), higher value results in smoother suppression
-    
 
     Animator m_Animator;
     Rigidbody m_Rigidbody;
@@ -24,6 +23,13 @@ public class Player : MonoBehaviour
 
     Vector3 m_CurrentPosition;
     Vector3 m_LastPosition;
+
+    void OnCollisionEnter(Collision otcher)
+    {
+        m_Animator.SetBool("crashed", true);
+        m_Animator.SetTrigger("crash");
+        Debug.Log("wypierdolil sie");
+    }
 
     void Start()
     {
