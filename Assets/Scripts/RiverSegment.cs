@@ -18,7 +18,7 @@ public enum RiverSegmentType
 public class RiverSegment : MonoBehaviour
 {
     [SerializeField] public RiverSegmentType type;
-    public UnityAction onExitScreen;
+    public UnityAction onDespawn;
 
     public Vector3 shift => end.position - start.position; //difference between start and end of segment
     public Vector3 endPosition => new Vector3(end.position.x, 0, end.position.z); //ignore Y coordinate
@@ -29,8 +29,8 @@ public class RiverSegment : MonoBehaviour
     void Awake() => river = FindObjectOfType<River>();
     void FixedUpdate()
     {
-        if (end.position.z < river.bottomScreenBorderZ)
-            onExitScreen();
+        if (end.position.z < river.despawnPositionZ)
+            onDespawn();
     }
 
     public bool WillFitWithinScreenBorders(Vector3 spawnPosition, float leftBorderX, float rightBorderX)
