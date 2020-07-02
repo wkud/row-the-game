@@ -29,8 +29,6 @@ public class RiverSegment : MonoBehaviour
     void Awake() => river = FindObjectOfType<River>();
     void FixedUpdate()
     {
-        transform.position += Vector3.back * river.FlowSpeed; 
-
         if (end.position.z < river.bottomScreenBorderZ)
             onExitScreen();
     }
@@ -42,11 +40,7 @@ public class RiverSegment : MonoBehaviour
     }
     public void PlaceStartOfSegmentAt(Vector3 spawnPosition)
     {
-        var prefabVerticalOffset = transform.position.y; //save y offset
-
         var offsetFromPivotToStartOfSegment = start.position - transform.position; //difference between current position and (desired) start position
         transform.position = spawnPosition - offsetFromPivotToStartOfSegment;
-
-        transform.position += Vector3.up * prefabVerticalOffset; //restore y offset
     }
 }

@@ -9,7 +9,7 @@ using UnityEngine;
 public class River : MonoBehaviour
 {
     public float bottomScreenBorderZ { get; private set; }
-    [SerializeField] public float FlowSpeed;
+    
 
     [SerializeField] private RiverSegment[] riverSegments;
     [SerializeField] private RiverSegment startSegment;
@@ -88,7 +88,7 @@ public class River : MonoBehaviour
         }
 
         //set segment up
-        segment.PlaceStartOfSegmentAt(spawnPosition + Vector3.back * FlowSpeed); //predict position in next frame (to fix gaps between segments)
+        segment.PlaceStartOfSegmentAt(spawnPosition); 
 
         lastSegment = segment;
     }
