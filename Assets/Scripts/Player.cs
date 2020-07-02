@@ -22,10 +22,16 @@ public class Player : MonoBehaviour
     bool m_RowPerformed = false;
     float m_RotationSuppression = 1.0f; // higher suppression when m_RotationSuppression is smaller
 
+    Vector3 m_CurrentPosition;
+    Vector3 m_LastPosition;
+
     void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Animator = gameObject.GetComponent<Animator>();
+
+        m_LastPosition = transform.position;
+        m_CurrentPosition = transform.position;
     }
 
     void FixedUpdate()
@@ -64,5 +70,13 @@ public class Player : MonoBehaviour
         m_Rotation = Quaternion.LookRotation(desiredForward);
         m_Rigidbody.MoveRotation(m_Rotation);
         m_RotationSuppression *= rotationSuppressionFactor;
+
+        m_LastPosition = m_CurrentPosition;
+        m_CurrentPosition = transform.position;
+    }
+
+    public Vector3 GetVelocity()
+    {
+        return (m_CurrentPosition - m_LastPosition) / Time.fixedDeltaTime;
     }
 }

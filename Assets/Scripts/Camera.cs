@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class Camera : MonoBehaviour
 {
-    [SerializeField] public float forwardSpeed;
+    public GameObject camera;
+    [SerializeField] public float forwardSpeed = 0.01f;
 
     void FixedUpdate()
     {
-        transform.position += Vector3.forward * forwardSpeed;
+        camera.transform.position += Vector3.forward * forwardSpeed;
+    }
+
+    public Vector3 GetVelocity()
+    {
+        return (Vector3.forward * forwardSpeed) / Time.fixedDeltaTime;
     }
 }
