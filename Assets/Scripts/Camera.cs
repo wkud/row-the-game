@@ -5,10 +5,12 @@ using UnityEngine;
 public class Camera : MonoBehaviour
 {
     public GameObject camera;
+    public Transform player;
     [SerializeField] public float forwardSpeed = 0.01f;
 
     void FixedUpdate()
     {
+        camera.transform.position = new Vector3(player.position.x, camera.transform.position.y, camera.transform.position.z);
         camera.transform.position += Vector3.forward * forwardSpeed;
     }
 
