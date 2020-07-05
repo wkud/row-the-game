@@ -8,7 +8,7 @@ public class Camera : MonoBehaviour
     public Transform player;
     [SerializeField] public float forwardSpeed = 0.01f;
 
-    bool skipUpdate = true;
+    public bool skipUpdate { get; private set; } = true;
 
     public void SetSkipUpdate(bool newValue)
     {

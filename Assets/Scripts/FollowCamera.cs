@@ -6,5 +6,11 @@ public class FollowCamera : MonoBehaviour
 {
     private Camera camera;
     void Awake() => camera = FindObjectOfType<Camera>();
-    void FixedUpdate() => transform.position += Vector3.forward * camera.forwardSpeed;
+    void FixedUpdate()
+    {
+        if (camera.skipUpdate)
+            return;
+
+        transform.position += Vector3.forward * camera.forwardSpeed;
+    }
 }
