@@ -10,8 +10,8 @@ public class ScoreManager : MonoBehaviour
     public TextMeshProUGUI gameScoreText;
     public TextMeshProUGUI endGameScoreText;
     public TextMeshProUGUI endGameHighScoreText;
-    public Camera camera;
-    public Player player;
+    private Camera camera;
+    private Player player;
     public int scoreRefreshToSkip = 30;
     public float baseScoreMultiplier = 100f;
     public float[] velocityThresholds = { 1.25f, 2f }; // ascending values [n]
@@ -22,6 +22,12 @@ public class ScoreManager : MonoBehaviour
     int m_GameScore = 0;
     int m_GameHighScore = 0;
     int m_SkippedScoreRefreshes = 0;
+
+    void Awake()
+    {
+        camera = FindObjectOfType<Camera>();
+        player = FindObjectOfType<Player>();
+    }
 
     void Start()
     {

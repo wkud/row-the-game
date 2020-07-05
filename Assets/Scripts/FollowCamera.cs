@@ -11,6 +11,7 @@ public class FollowCamera : MonoBehaviour
         if (camera.skipUpdate)
             return;
 
-        transform.position += Vector3.forward * camera.forwardSpeed;
+        var cameraPosition = camera.transform.position;
+        transform.position = new Vector3(cameraPosition.x, transform.position.y, cameraPosition.z);
     }
 }

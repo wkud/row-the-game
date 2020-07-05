@@ -5,8 +5,8 @@ using BayatGames.SaveGameFree;
 
 public class UIManager : MonoBehaviour
 {
-    public Player player;
-    public Camera camera;
+    private Player player;
+    private Camera camera;
     public Canvas startMenu;
     public Canvas gameMenu;
     public Canvas endMenu;
@@ -20,6 +20,12 @@ public class UIManager : MonoBehaviour
     GameState currentGameState;
     bool shouldGameStart = false;
     bool restartInProgress = false;
+
+    private void Awake()
+    {
+        player = FindObjectOfType<Player>();
+        camera = FindObjectOfType<Camera>();
+    }
 
     public void SetShouldGameStart(bool newValue)
     {
