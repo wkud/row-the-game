@@ -6,17 +6,17 @@ using UnityEngine.SceneManagement;
 public class StartMenu : MonoBehaviour
 {
     public UIManager uiManager;
-    public AudioSource buttonSound;
     
     public void StartGame()
     {
-        buttonSound.Play();
+        AudioManager.Instance.Play("button click");
+        AudioManager.Instance.Play("music");
         uiManager.SetShouldGameStart(true);
     }
 
     public void QuitGame()
     {
-        buttonSound.Play();
+        AudioManager.Instance.Play("button click");
         Debug.Log("QuitGame() called");
         Application.Quit();
     }

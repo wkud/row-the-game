@@ -12,9 +12,6 @@ public class Player : MonoBehaviour
     public float moveSuppressionFactor = 0.95f; // in (0, 1), higher value results in smoother suppression
     public float rotationSpeed = 1.0f; // in (0, inf)
     public float rotationSuppressionFactor = 0.95f;  // in (0, 1), higher value results in smoother suppression
-    
-    public AudioSource crashAudio;
-    public AudioSource swingAudio;
 
     Animator m_Animator;
     Rigidbody m_Rigidbody;
@@ -35,7 +32,7 @@ public class Player : MonoBehaviour
         m_Animator.SetBool("crashed", true);
         m_Animator.SetTrigger("crash");
         hasCrashed = true;
-        crashAudio.Play();
+        AudioManager.Instance.Play("crash");
     }
 
     public bool CrashOccured()
@@ -87,7 +84,7 @@ public class Player : MonoBehaviour
             {
                 m_Animator.SetTrigger("swingLeft");
             }
-            swingAudio.Play();
+            AudioManager.Instance.Play("oar swing");
         }
 
         m_Rigidbody.MovePosition(m_Rigidbody.position + m_Movement);

@@ -6,18 +6,17 @@ using BayatGames.SaveGameFree;
 
 public class EndMenu : MonoBehaviour
 {
-    public AudioSource buttonSound;
-    
     public void RestartGame()
     {
-        buttonSound.Play();
         SaveGame.Save<bool>("restartInProgress", true);
         SceneManager.LoadScene("MainScene");
+        AudioManager.Instance.Play("button click");
+        AudioManager.Instance.Play("music");
     }
 
     public void QuitGame()
     {
-        buttonSound.Play();
+        AudioManager.Instance.Play("button click");
         Application.Quit();
         Debug.Log("EndMenu.QuitGame()");
     }

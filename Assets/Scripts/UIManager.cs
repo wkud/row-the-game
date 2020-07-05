@@ -61,6 +61,8 @@ public class UIManager : MonoBehaviour
             currentGameState = GameState.EndMenu;
             shouldGameStart = false;
             restartInProgress = false;
+            AudioManager.Instance.Stop("music");
+            AudioManager.Instance.Play("game over");
         }
     }
 
