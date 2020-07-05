@@ -34,6 +34,15 @@ public class Player : MonoBehaviour
         hasCrashed = true;
         AudioManager.Instance.Play("crash");
     }
+    void OnTriggerEnter(Collider other)
+    {
+        var cameraCollider = other.GetComponent<CameraCollider>();
+        
+        if (cameraCollider != null && cameraCollider.IsRear)
+        {
+            hasCrashed = true;
+        }
+    }
 
     public bool CrashOccured()
     {

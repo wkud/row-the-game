@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class CameraCollider : MonoBehaviour
 {
-    enum ColliderType
+    public enum ColliderType
     {
         Unassigned,
         Front,
         Rear
     }
     [SerializeField] private ColliderType colliderType;
-
+    public bool IsRear => colliderType == ColliderType.Rear;
+    
     private Camera camera;
     void Awake()
     {
@@ -24,9 +25,6 @@ public class CameraCollider : MonoBehaviour
         {
             case ColliderType.Front:
                 camera.JumpForward();
-                break;
-            case ColliderType.Rear:
-                //todo game over
                 break;
             case ColliderType.Unassigned:
                 Debug.LogError("CameraCollider.colliderType is unassigned");
